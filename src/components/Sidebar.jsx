@@ -53,7 +53,7 @@ export default function Sidebar({ data, category, query, onCategory, onQuery, se
               ? '지금은 전체 카테고리에서 바로 검색 중입니다. 카테고리를 누르면 결과를 더 좁힐 수 있습니다.'
               : category
               ? `"${category}" 타입만 아래에 표시됩니다. 다시 누르면 접힙니다.`
-              : '카테고리를 눌러야 타입 목록이 열리도록 바꿨습니다.'}
+              : '카테고리를 눌러야 타입 목록이 열립니다.'}
           </p>
         </div>
       </div>
