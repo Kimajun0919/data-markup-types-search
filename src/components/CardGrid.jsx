@@ -10,9 +10,9 @@ export default function CardGrid({ items, total, onSelect, activeCategory, query
       <div className={styles.empty}>
         <div className={styles.emptyEmoji}>🧭</div>
         <p>카테고리를 선택하면 타입 목록이 열립니다.</p>
-        <p className={styles.emptyHint}>
+        {/* <p className={styles.emptyHint}>
           먼저 범위를 좁히고, 그 다음 검색어로 속성명이나 DB 컬럼을 찾는 흐름으로 정리했습니다.
-        </p>
+        </p> */}
       </div>
     )
   }

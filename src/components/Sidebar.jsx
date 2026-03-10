@@ -10,7 +10,7 @@ export default function Sidebar({ data, category, query, onCategory, onQuery, se
       <div className={styles.header}>
         <div>
           <p className={styles.eyebrow}>Browse Flow</p>
-          <h2 className={styles.title}>카테고리를 고르고 넓게 검색</h2>
+          <h2 className={styles.title}>카테고리 및 검색</h2>
         </div>
         <div className={styles.hint}>
           <kbd>⌘K</kbd> 검색 <span className={styles.dot}>•</span> <kbd>ESC</kbd> 닫기
@@ -27,8 +27,8 @@ export default function Sidebar({ data, category, query, onCategory, onQuery, se
           onChange={e => onQuery(e.target.value)}
           placeholder={
             category
-              ? `${category} 안에서 항목명·DB 컬럼·속성명 검색...`
-              : '항목명·DB 컬럼·속성명 검색... 카테고리를 고르면 더 좁혀집니다'
+              ? `${category} 안에서 항목명·DB 컬럼·속성명 검색`
+              : '항목명·DB 컬럼·속성명 검색'
           }
           autoComplete="off"
           spellCheck={false}
