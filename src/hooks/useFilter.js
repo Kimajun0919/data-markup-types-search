@@ -2,12 +2,11 @@ import { useMemo } from 'react'
 
 export function useFilter(data, { category, query }) {
   return useMemo(() => {
-    if (!category) return []
-
     const q = query.trim().toLowerCase()
+    if (!category && !q) return []
 
     return data.filter(d => {
-      const matchCat = category === '전체' || d.category === category
+      const matchCat = !category || category === '전체' || d.category === category
 
       if (!matchCat) return false
       if (!q) return true

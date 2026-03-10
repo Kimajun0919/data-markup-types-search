@@ -28,7 +28,7 @@ export default function Sidebar({ data, category, query, onCategory, onQuery, se
           placeholder={
             category
               ? `${category} 안에서 항목명·DB 컬럼·속성명 검색...`
-              : '카테고리를 먼저 고른 뒤 검색하면 결과가 더 선명하게 보입니다'
+              : '항목명·DB 컬럼·속성명 검색... 카테고리를 고르면 더 좁혀집니다'
           }
           autoComplete="off"
           spellCheck={false}
@@ -49,7 +49,9 @@ export default function Sidebar({ data, category, query, onCategory, onQuery, se
         <div>
           <div className={styles.sectionLabel}>카테고리</div>
           <p className={styles.sectionCopy}>
-            {category
+            {query.trim() && !category
+              ? '지금은 전체 카테고리에서 바로 검색 중입니다. 카테고리를 누르면 결과를 더 좁힐 수 있습니다.'
+              : category
               ? `"${category}" 타입만 아래에 표시됩니다. 다시 누르면 접힙니다.`
               : '카테고리를 눌러야 타입 목록이 열리도록 바꿨습니다.'}
           </p>

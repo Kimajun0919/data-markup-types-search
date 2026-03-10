@@ -17,6 +17,7 @@ export default function App() {
   const [focusedProp, setFocusedProp] = useState('')
   const searchRef = useRef(null)
   const hasActiveCategory = Boolean(category)
+  const hasQuery = Boolean(query.trim())
 
   const filtered = useFilter(data, { category, query })
 
@@ -70,7 +71,7 @@ export default function App() {
           searchRef={searchRef}
         />
         <main className={styles.main}>
-          {hasActiveCategory && (
+          {hasQuery && (
             <SearchGuide
               data={data}
               category={category}

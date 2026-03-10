@@ -2,7 +2,10 @@ import Card from './Card'
 import styles from './CardGrid.module.css'
 
 export default function CardGrid({ items, total, onSelect, activeCategory, query }) {
-  if (!activeCategory) {
+  const trimmedQuery = query.trim()
+  const hasQuery = Boolean(trimmedQuery)
+
+  if (!activeCategory && !hasQuery) {
     return (
       <div className={styles.empty}>
         <div className={styles.emptyEmoji}>🧭</div>
@@ -20,8 +23,10 @@ export default function CardGrid({ items, total, onSelect, activeCategory, query
         <div className={styles.emptyEmoji}>🔍</div>
         <p>검색 결과가 없습니다.</p>
         <p className={styles.emptyHint}>
-          {query
-            ? `"${activeCategory}" 안에서 "${query}"와 맞는 타입을 찾지 못했습니다.`
+          {hasQuery
+            ? activeCategory
+              ? `"${activeCategory}" 안에서 "${trimmedQuery}"와 맞는 타입을 찾지 못했습니다.`
+              : `"${trimmedQuery}"와 맞는 타입을 전체 카테고리에서 찾지 못했습니다.`
             : `"${activeCategory}" 안에 표시할 타입이 없습니다.`}
         </p>
       </div>
@@ -31,10 +36,20 @@ export default function CardGrid({ items, total, onSelect, activeCategory, query
   return (
     <div>
       <div className={styles.meta}>
-        <span className={styles.scope}>{activeCategory === '전체' ? '전체 보기' : activeCategory}</span>
+        <span className={styles.scope}>
+          {activeCategory
+            ? activeCategory === '전체'
+              ? '전체 보기'
+              : activeCategory
+            : '통합 검색'}
+        </span>
         <span className={styles.divider}>•</span>
         <strong>{items.length}</strong>
-        <span>{activeCategory === '전체' ? ` / ${total}개 타입` : '개 타입'}</span>
+        <span>
+          {activeCategory === '전체' || (!activeCategory && hasQuery)
+            ? ` / ${total}개 타입`
+            : '개 타입'}
+        </span>
       </div>
       <div className={styles.grid}>
         {items.map(item => (
