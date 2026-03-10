@@ -1,10 +1,10 @@
 .panel {
-  background: linear-gradient(180deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.88));
-  border: 1px solid rgba(59, 130, 246, 0.18);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(248, 251, 255, 0.92));
+  border: 1px solid rgba(37, 99, 235, 0.14);
   border-radius: 20px;
   padding: 18px;
   margin-bottom: 18px;
-  box-shadow: 0 18px 40px rgba(2, 6, 23, 0.28);
+  box-shadow: 0 18px 40px rgba(59, 88, 133, 0.1);
 }
 
 .header {
@@ -34,8 +34,8 @@
   flex-shrink: 0;
   padding: 6px 10px;
   border-radius: 999px;
-  background: rgba(59, 130, 246, 0.14);
-  color: var(--accent2);
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--accent);
   font-size: 12px;
   font-weight: 700;
 }
@@ -60,8 +60,8 @@
 }
 
 .result {
-  background: rgba(15, 23, 42, 0.72);
-  border: 1px solid rgba(148, 163, 184, 0.16);
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(148, 163, 184, 0.22);
   border-radius: 16px;
   padding: 14px;
   text-align: left;
@@ -72,8 +72,8 @@
 
 .result:hover {
   transform: translateY(-2px);
-  border-color: rgba(96, 165, 250, 0.5);
-  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.24);
+  border-color: rgba(37, 99, 235, 0.35);
+  box-shadow: 0 14px 28px rgba(59, 88, 133, 0.14);
 }
 
 .resultTop {
@@ -93,7 +93,7 @@
 
 .matchBadge {
   background: rgba(16, 185, 129, 0.14);
-  color: #6ee7b7;
+  color: #0f766e;
   border-radius: 999px;
   padding: 4px 9px;
   font-size: 11px;
@@ -106,7 +106,7 @@
   font-family: var(--font-mono);
   font-size: 16px;
   font-weight: 700;
-  color: #dbeafe;
+  color: var(--accent);
   word-break: break-all;
 }
 
@@ -142,7 +142,7 @@
   gap: 6px;
   padding: 5px 8px;
   border-radius: 10px;
-  background: rgba(30, 41, 59, 0.9);
+  background: #f3f7fb;
   color: var(--muted);
   font-size: 11px;
   font-family: var(--font-mono);

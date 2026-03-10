@@ -1,17 +1,17 @@
 /* ── Design Tokens ────────────────────────────── */
 :root {
-  --bg:          #0a0e1a;
-  --surface:     #111827;
-  --card:        #161d2e;
-  --border:      #1e2d47;
-  --accent:      #3b82f6;
-  --accent2:     #06b6d4;
+  --bg:          #f6f7fb;
+  --surface:     #fffdf8;
+  --card:        #ffffff;
+  --border:      #d7dfeb;
+  --accent:      #2563eb;
+  --accent2:     #0f766e;
   --green:       #10b981;
   --yellow:      #f59e0b;
   --red:         #ef4444;
-  --text:        #e2e8f0;
-  --muted:       #64748b;
-  --subtle:      #1e293b;
+  --text:        #172033;
+  --muted:       #66758a;
+  --subtle:      #eef3f8;
 
   --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
   --font-body:    'Noto Sans KR', sans-serif;
@@ -26,12 +26,16 @@
 }
 html { scroll-behavior: smooth; }
 body {
-  background: var(--bg);
+  background:
+    radial-gradient(circle at top left, rgba(37, 99, 235, 0.1), transparent 34%),
+    radial-gradient(circle at top right, rgba(15, 118, 110, 0.08), transparent 30%),
+    linear-gradient(180deg, #fcfdff 0%, var(--bg) 100%);
   color: var(--text);
   font-family: var(--font-body);
   font-size: 14px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  color-scheme: light;
 }
 
 /* ── Scrollbar ────────────────────────────────── */

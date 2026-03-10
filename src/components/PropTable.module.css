@@ -72,7 +72,7 @@
 }
 .table td {
   padding: 9px 12px;
-  border-bottom: 1px solid rgba(30,45,71,0.5);
+  border-bottom: 1px solid rgba(215, 223, 235, 0.85);
   vertical-align: top;
 }
 .row:last-child td { border-bottom: none; }
@@ -134,7 +134,7 @@
 }
 .example {
   font-family: var(--font-mono);
-  color: #a5f3fc;
+  color: var(--accent2);
   font-size: 10px;
   max-width: 150px;
   word-break: break-all;

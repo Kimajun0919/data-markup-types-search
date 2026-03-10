@@ -20,7 +20,7 @@
 .card:focus-visible {
   border-color: var(--card-color, var(--accent));
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  box-shadow: 0 14px 30px rgba(62, 84, 120, 0.14);
 }
 .card:hover::before,
 .card:focus-visible::before { opacity: 1; }
@@ -72,7 +72,7 @@
 .tagCat {
   font-size: 10px; font-weight: 600;
   padding: 2px 8px; border-radius: 8px;
-  background: var(--subtle); color: var(--muted);
+  background: var(--subtle); color: #506176;
 }
 .tagReq {
   font-size: 10px; font-weight: 600;
