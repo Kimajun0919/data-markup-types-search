@@ -1,0 +1,105 @@
+.sidebar {
+  position: sticky;
+  top: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Search */
+.searchBox {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.input {
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 13px;
+  width: 100%;
+  min-width: 0;
+}
+.input::placeholder { color: var(--muted); }
+.clear {
+  background: none; border: none; cursor: pointer;
+  color: var(--muted); font-size: 16px; line-height: 1;
+  padding: 0 2px;
+  transition: color 0.15s;
+}
+.clear:hover { color: var(--text); }
+
+/* Nav */
+.catList { padding: 8px 0; flex: 1; }
+.sectionLabel {
+  padding: 6px 14px 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.catBtn {
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 14px;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 13px;
+  transition: background 0.12s, color 0.12s;
+  text-align: left;
+  border-radius: 0;
+}
+.catBtn:hover { background: var(--subtle); color: var(--text); }
+.catBtn.active {
+  background: color-mix(in srgb, var(--cat-color, var(--accent)) 12%, transparent);
+  color: var(--cat-color, var(--accent));
+}
+.icon { font-size: 15px; width: 20px; text-align: center; flex-shrink: 0; }
+.label { flex: 1; }
+.count {
+  margin-left: auto;
+  background: var(--subtle);
+  border-radius: 10px;
+  padding: 1px 7px;
+  font-size: 11px;
+  font-weight: 600;
+  min-width: 24px;
+  text-align: center;
+}
+.countActive {
+  background: color-mix(in srgb, var(--cat-color, var(--accent)) 20%, transparent);
+  color: inherit;
+}
+
+/* Hint */
+.hint {
+  padding: 10px 14px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--muted);
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+kbd {
+  background: var(--subtle);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted);
+}

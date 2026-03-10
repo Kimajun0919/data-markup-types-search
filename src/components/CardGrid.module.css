@@ -1,0 +1,20 @@
+.meta {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+.meta strong { color: var(--accent); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 14px;
+}
+
+.empty {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--muted);
+}
+.emptyEmoji { font-size: 40px; margin-bottom: 12px; }
+.emptyHint { font-size: 12px; margin-top: 6px; opacity: 0.6; }
