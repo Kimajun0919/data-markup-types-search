@@ -2,6 +2,8 @@ import { useMemo } from 'react'
 
 export function useFilter(data, { category, query }) {
   return useMemo(() => {
+    if (!category) return []
+
     const q = query.trim().toLowerCase()
 
     return data.filter(d => {

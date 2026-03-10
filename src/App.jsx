@@ -11,11 +11,12 @@ import styles from './App.module.css'
 
 export default function App() {
   const { data, loading, error } = useData()
-  const [category, setCategory] = useState('전체')
+  const [category, setCategory] = useState(null)
   const [query, setQuery] = useState('')
   const [selected, setSelected] = useState(null)
   const [focusedProp, setFocusedProp] = useState('')
   const searchRef = useRef(null)
+  const hasActiveCategory = Boolean(category)
 
   const filtered = useFilter(data, { category, query })
 
@@ -27,6 +28,11 @@ export default function App() {
   const openItem = useCallback((item, prop = '') => {
     setSelected(item)
     setFocusedProp(prop)
+  }, [])
+  const handleCategoryChange = useCallback((nextCategory) => {
+    setCategory((currentCategory) => (
+      currentCategory === nextCategory ? null : nextCategory
+    ))
   }, [])
 
   useKeyboard({ closePanel, focusSearch })
@@ -59,21 +65,25 @@ export default function App() {
           data={data}
           category={category}
           query={query}
-          onCategory={setCategory}
+          onCategory={handleCategoryChange}
           onQuery={setQuery}
           searchRef={searchRef}
         />
         <main className={styles.main}>
-          <SearchGuide
-            data={data}
-            category={category}
-            query={query}
-            onSelect={openItem}
-          />
+          {hasActiveCategory && (
+            <SearchGuide
+              data={data}
+              category={category}
+              query={query}
+              onSelect={openItem}
+            />
+          )}
           <CardGrid
             items={filtered}
             total={data.length}
             onSelect={openItem}
+            activeCategory={category}
+            query={query}
           />
         </main>
       </div>

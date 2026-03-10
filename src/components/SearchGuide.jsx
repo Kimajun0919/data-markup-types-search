@@ -26,7 +26,7 @@ export default function SearchGuide({ data, category, query, onSelect }) {
     [data, category, trimmedQuery]
   )
 
-  if (!trimmedQuery) return null
+  if (!category || !trimmedQuery) return null
 
   return (
     <section className={styles.panel} aria-label="빠른 속성 안내">
@@ -45,7 +45,7 @@ export default function SearchGuide({ data, category, query, onSelect }) {
       ) : (
         <>
           <p className={styles.helper}>
-            "{trimmedQuery}"로 검색된 항목 중 실제로 마크업에 써야 하는 속성명을 바로 보여줍니다.
+            "{category}" 안에서 "{trimmedQuery}"로 검색된 항목 중 실제로 마크업에 써야 하는 속성명만 먼저 보여줍니다.
           </p>
 
           <div className={styles.list}>
@@ -97,7 +97,7 @@ export default function SearchGuide({ data, category, query, onSelect }) {
 
 function buildMatches(data, category, query) {
   const normalizedQuery = normalize(query)
-  if (!normalizedQuery) return []
+  if (!category || !normalizedQuery) return []
 
   const tokens = normalizedQuery.split(/\s+/).filter(Boolean)
   const scopedItems = data.filter(

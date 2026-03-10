@@ -1,4 +1,3 @@
-import { useRef } from 'react'
 import { CATEGORIES } from '../constants/categories'
 import styles from './Sidebar.module.css'
 
@@ -7,8 +6,17 @@ export default function Sidebar({ data, category, query, onCategory, onQuery, se
   data.forEach(d => { counts[d.category] = (counts[d.category] || 0) + 1 })
 
   return (
-    <aside className={styles.sidebar}>
-      {/* Search */}
+    <section className={styles.sidebar}>
+      <div className={styles.header}>
+        <div>
+          <p className={styles.eyebrow}>Browse Flow</p>
+          <h2 className={styles.title}>카테고리를 고르고 넓게 검색</h2>
+        </div>
+        <div className={styles.hint}>
+          <kbd>⌘K</kbd> 검색 <span className={styles.dot}>•</span> <kbd>ESC</kbd> 닫기
+        </div>
+      </div>
+
       <div className={styles.searchBox}>
         <SearchIcon />
         <input
@@ -17,20 +25,38 @@ export default function Sidebar({ data, category, query, onCategory, onQuery, se
           type="text"
           value={query}
           onChange={e => onQuery(e.target.value)}
-          placeholder="항목명·DB 컬럼·속성명 검색..."
+          placeholder={
+            category
+              ? `${category} 안에서 항목명·DB 컬럼·속성명 검색...`
+              : '카테고리를 먼저 고른 뒤 검색하면 결과가 더 선명하게 보입니다'
+          }
           autoComplete="off"
           spellCheck={false}
         />
         {query && (
-          <button className={styles.clear} onClick={() => onQuery('')} aria-label="검색 초기화">
+          <button
+            type="button"
+            className={styles.clear}
+            onClick={() => onQuery('')}
+            aria-label="검색 초기화"
+          >
             ×
           </button>
         )}
       </div>
 
-      {/* Categories */}
+      <div className={styles.sectionHeader}>
+        <div>
+          <div className={styles.sectionLabel}>카테고리</div>
+          <p className={styles.sectionCopy}>
+            {category
+              ? `"${category}" 타입만 아래에 표시됩니다. 다시 누르면 접힙니다.`
+              : '카테고리를 눌러야 타입 목록이 열리도록 바꿨습니다.'}
+          </p>
+        </div>
+      </div>
+
       <nav className={styles.catList}>
-        <div className={styles.sectionLabel}>카테고리</div>
         {CATEGORIES.map(({ key, icon, color }) => {
           const count = key === '전체' ? data.length : (counts[key] || 0)
           if (count === 0 && key !== '전체') return null
@@ -38,23 +64,26 @@ export default function Sidebar({ data, category, query, onCategory, onQuery, se
           return (
             <button
               key={key}
+              type="button"
               className={`${styles.catBtn} ${isActive ? styles.active : ''}`}
               onClick={() => onCategory(key)}
               style={isActive ? { '--cat-color': color } : {}}
             >
-              <span className={styles.icon}>{icon}</span>
-              <span className={styles.label}>{key}</span>
+              <span className={styles.iconWrap}>
+                <span className={styles.icon}>{icon}</span>
+              </span>
+              <span className={styles.meta}>
+                <span className={styles.label}>{key === '전체' ? '전체 보기' : key}</span>
+                <span className={styles.caption}>
+                  {key === '전체' ? '모든 타입 펼치기' : `${key} 타입만 보기`}
+                </span>
+              </span>
               <span className={`${styles.count} ${isActive ? styles.countActive : ''}`}>{count}</span>
             </button>
           )
         })}
       </nav>
-
-      {/* Shortcut hint */}
-      <div className={styles.hint}>
-        <kbd>⌘K</kbd> 검색&nbsp;&nbsp;<kbd>ESC</kbd> 닫기
-      </div>
-    </aside>
+    </section>
   )
 }
 
