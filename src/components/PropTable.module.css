@@ -77,6 +77,7 @@
 }
 .row:last-child td { border-bottom: none; }
 .row:hover td { background: rgba(59,130,246,0.04); }
+.highlightRow td { background: rgba(59,130,246,0.1); }
 
 .propName {
   font-family: var(--font-mono);
@@ -84,6 +85,24 @@
   font-size: 11px;
   font-weight: 600;
   word-break: break-all;
+  display: block;
+}
+.propAlias {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  margin-right: 6px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.08);
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.4;
+}
+.propAlias strong {
+  color: var(--text);
+  font-weight: 700;
 }
 .propType {
   font-family: var(--font-mono);

@@ -17,7 +17,7 @@ export default function Sidebar({ data, category, query, onCategory, onQuery, se
           type="text"
           value={query}
           onChange={e => onQuery(e.target.value)}
-          placeholder="타입명·속성·키워드 검색..."
+          placeholder="항목명·DB 컬럼·속성명 검색..."
           autoComplete="off"
           spellCheck={false}
         />

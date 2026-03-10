@@ -14,9 +14,12 @@ function matchesQuery(item, q) {
     item.properties.some(
       (p) =>
         normalize(p.prop).includes(q) ||
+        normalize(p.userLabel).includes(q) ||
+        normalize(p.adminLabel).includes(q) ||
+        normalize(p.type).includes(q) ||
+        normalize(p.dataType).includes(q) ||
         normalize(p.note).includes(q) ||
-        normalize(p.dbColumn).includes(q) ||
-        normalize(p.userLabel).includes(q)
+        normalize(p.dbColumn).includes(q)
     )
   )
 }

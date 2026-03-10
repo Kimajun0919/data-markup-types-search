@@ -6,6 +6,7 @@ import Header from './components/Header'
 import Sidebar from './components/Sidebar'
 import CardGrid from './components/CardGrid'
 import DetailPanel from './components/DetailPanel'
+import SearchGuide from './components/SearchGuide'
 import styles from './App.module.css'
 
 export default function App() {
@@ -13,12 +14,20 @@ export default function App() {
   const [category, setCategory] = useState('전체')
   const [query, setQuery] = useState('')
   const [selected, setSelected] = useState(null)
+  const [focusedProp, setFocusedProp] = useState('')
   const searchRef = useRef(null)
 
   const filtered = useFilter(data, { category, query })
 
-  const closePanel = useCallback(() => setSelected(null), [])
+  const closePanel = useCallback(() => {
+    setSelected(null)
+    setFocusedProp('')
+  }, [])
   const focusSearch = useCallback(() => searchRef.current?.focus(), [])
+  const openItem = useCallback((item, prop = '') => {
+    setSelected(item)
+    setFocusedProp(prop)
+  }, [])
 
   useKeyboard({ closePanel, focusSearch })
 
@@ -55,16 +64,27 @@ export default function App() {
           searchRef={searchRef}
         />
         <main className={styles.main}>
+          <SearchGuide
+            data={data}
+            category={category}
+            query={query}
+            onSelect={openItem}
+          />
           <CardGrid
             items={filtered}
             total={data.length}
-            onSelect={setSelected}
+            onSelect={openItem}
           />
         </main>
       </div>
 
       {selected && (
-        <DetailPanel item={selected} onClose={closePanel} />
+        <DetailPanel
+          item={selected}
+          onClose={closePanel}
+          initialPropQuery={focusedProp}
+          highlightedProp={focusedProp}
+        />
       )}
     </div>
   )

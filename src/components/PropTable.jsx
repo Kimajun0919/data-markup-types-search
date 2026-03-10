@@ -1,12 +1,17 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { REQ_STYLE } from '../constants/categories'
 import styles from './PropTable.module.css'
 
 const FILTERS = ['전체', '필수', '권장', '선택']
 
-export default function PropTable({ properties }) {
+export default function PropTable({ properties, initialQuery = '', highlightedProp = '' }) {
   const [filter, setFilter] = useState('전체')
-  const [propSearch, setPropSearch] = useState('')
+  const [propSearch, setPropSearch] = useState(initialQuery)
+
+  useEffect(() => {
+    setFilter('전체')
+    setPropSearch(initialQuery)
+  }, [initialQuery])
 
   const filtered = useMemo(() => {
     let list = filter === '전체' ? properties : properties.filter(p => p.required === filter)
@@ -14,6 +19,10 @@ export default function PropTable({ properties }) {
       const q = propSearch.toLowerCase()
       list = list.filter(p =>
         p.prop.toLowerCase().includes(q) ||
+        p.userLabel.toLowerCase().includes(q) ||
+        p.adminLabel.toLowerCase().includes(q) ||
+        p.type.toLowerCase().includes(q) ||
+        p.dataType.toLowerCase().includes(q) ||
         p.note.toLowerCase().includes(q) ||
         p.dbColumn.toLowerCase().includes(q)
       )
@@ -46,7 +55,7 @@ export default function PropTable({ properties }) {
         <input
           className={styles.propSearch}
           type="text"
-          placeholder="속성명·비고 검색..."
+          placeholder="속성명·항목명·DB 컬럼 검색..."
           value={propSearch}
           onChange={e => setPropSearch(e.target.value)}
         />
@@ -73,7 +82,11 @@ export default function PropTable({ properties }) {
               </tr>
             ) : (
               filtered.map((p, i) => (
-                <PropRow key={`${p.prop}-${i}`} prop={p} />
+                <PropRow
+                  key={`${p.prop}-${i}`}
+                  prop={p}
+                  isHighlighted={highlightedProp === p.prop}
+                />
               ))
             )}
           </tbody>
@@ -83,11 +96,28 @@ export default function PropTable({ properties }) {
   )
 }
 
-function PropRow({ prop: p }) {
+function PropRow({ prop: p, isHighlighted }) {
   const reqStyle = REQ_STYLE[p.required] || {}
+  const aliases = [
+    { label: '항목명', value: p.userLabel },
+    { label: '관리명', value: p.adminLabel },
+  ].filter((entry, index, list) => {
+    const value = String(entry.value || '').trim()
+    if (!value || value === '—' || value === '-') return false
+    return list.findIndex((candidate) => candidate.value === entry.value) === index
+  })
+
   return (
-    <tr className={styles.row}>
-      <td><span className={styles.propName}>{p.prop}</span></td>
+    <tr className={`${styles.row} ${isHighlighted ? styles.highlightRow : ''}`}>
+      <td>
+        <span className={styles.propName}>{p.prop}</span>
+        {aliases.map((alias) => (
+          <span key={`${p.prop}-${alias.label}`} className={styles.propAlias}>
+            <strong>{alias.label}</strong>
+            {alias.value}
+          </span>
+        ))}
+      </td>
       <td><span className={styles.propType}>{p.type}</span></td>
       <td>
         <span

@@ -18,6 +18,10 @@ export function useFilter(data, { category, query }) {
         d.properties.some(
           p =>
             p.prop.toLowerCase().includes(q) ||
+            p.userLabel.toLowerCase().includes(q) ||
+            p.adminLabel.toLowerCase().includes(q) ||
+            p.type.toLowerCase().includes(q) ||
+            p.dataType.toLowerCase().includes(q) ||
             p.note.toLowerCase().includes(q) ||
             p.dbColumn.toLowerCase().includes(q) ||
             p.example.toLowerCase().includes(q)

@@ -4,13 +4,13 @@ import PropTable from './PropTable'
 import CodeBlock from './CodeBlock'
 import styles from './DetailPanel.module.css'
 
-export default function DetailPanel({ item, onClose }) {
+export default function DetailPanel({ item, onClose, initialPropQuery = '', highlightedProp = '' }) {
   const [tab, setTab] = useState('props')
 
   // 패널 열릴 때마다 props 탭으로 초기화
   useEffect(() => {
     if (item) setTab('props')
-  }, [item?.id])
+  }, [item?.id, initialPropQuery])
 
   if (!item) return null
 
@@ -94,7 +94,13 @@ export default function DetailPanel({ item, onClose }) {
           </div>
 
           {/* Tab content */}
-          {tab === 'props' && <PropTable properties={item.properties} />}
+          {tab === 'props' && (
+            <PropTable
+              properties={item.properties}
+              initialQuery={initialPropQuery}
+              highlightedProp={highlightedProp}
+            />
+          )}
           {tab === 'code' && <ExamplesTab examples={item.examples} />}
         </div>
       </div>
